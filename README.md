@@ -1,58 +1,73 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Farm Direct
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Farm Direct** is a web-based farm produce direct marketing system with price negotiation, developed as a final year project. It connects farmers and buyers directly, allowing them to negotiate prices in real time without intermediaries.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **User registration and authentication** (Customer and Farmer roles), with token-based authentication via Laravel Sanctum
+- **Admin-controlled farmer verification** — new farmer accounts start as "pending" and must be approved before they can list products
+- **Product listing and browsing**, with category filtering and search
+- **Price negotiation** — a structured offer/counter-offer mechanism between buyer and farmer, with every exchange recorded
+- **Order management** — orders are created automatically once a negotiation is accepted
+- **Secure payment processing** via the Paystack payment gateway, with server-side transaction verification
+- **Role-specific dashboards** for customers and farmers
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Frontend:** React (TypeScript), Tailwind CSS, TanStack Router
+**Backend:** PHP (Laravel 13), Laravel Sanctum
+**Database:** MySQL
+**Payment Gateway:** Paystack
+**Deployment:** Vercel (frontend)
 
-## Learning Laravel
+## Live Demo
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Frontend:** [happy-farm-finds.vercel.app](https://happy-farm-finds.vercel.app)
+- **Backend repository:** [farmdirect-backend](https://github.com/demiladebabalola/farmdirect-backend)
+- **Frontend repository:** [happy-farm-finds](https://github.com/demiladebabalola/happy-farm-finds)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Local Setup (Backend)
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+1. Clone this repository:
+   ```
+   git clone https://github.com/demiladebabalola/farmdirect-backend.git
+   cd farmdirect-backend
+   ```
+2. Install PHP dependencies:
+   ```
+   composer install
+   ```
+3. Copy the example environment file and configure your database and Paystack keys:
+   ```
+   cp .env.example .env
+   ```
+4. Generate an application key:
+   ```
+   php artisan key:generate
+   ```
+5. Run migrations and seed the database with demo data:
+   ```
+   php artisan migrate --seed
+   ```
+6. Start the development server:
+   ```
+   php artisan serve
+   ```
 
-## Agentic Development
+## Test Accounts (after seeding)
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+| Role | Email | Password |
+|---|---|---|
+| Customer | demilade@farmdirect.test | password |
+| Farmer (Green Valley Farm) | greenvalley@farmdirect.test | password |
+| Farmer (Berry Bliss Farm) | berrybliss@farmdirect.test | password |
 
-```bash
-composer require laravel/boost --dev
+## Author
 
-php artisan boost:install
-```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Babalola Demilade Adesola
+B.Sc. Software Engineering, Baze University
+Supervised by Dr. Charles Saidu
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project was developed for academic purposes as part of a final year project submission.
