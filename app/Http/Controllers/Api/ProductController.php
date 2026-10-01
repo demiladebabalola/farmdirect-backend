@@ -42,18 +42,19 @@ class ProductController extends Controller
     {
         $this->authorizeFarmer($request);
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'category' => 'required|string',
-            'price' => 'required|integer|min:1',
-            'unit' => 'required|string',
-            'location' => 'required|string',
-            'image' => 'nullable|string',
-            'gallery' => 'nullable|array',
-            'stock' => 'required|string',
-            'description' => 'nullable|string',
-            'badge' => 'nullable|string',
-        ]);
+    $validated = $request->validate([
+    'name' => 'required|string|max:255',
+    'category' => 'required|string',
+    'price' => 'required|integer|min:1',
+    'min_price' => 'nullable|integer|min:1',
+    'unit' => 'required|string',
+    'location' => 'required|string',
+    'image' => 'nullable|string',
+    'gallery' => 'nullable|array',
+    'stock' => 'required|string',
+    'description' => 'nullable|string',
+    'badge' => 'nullable|string',
+]);
 
         $validated['slug'] = Str::slug($validated['name']).'-'.Str::random(4);
         $validated['farmer_id'] = $request->user()->id;
@@ -72,10 +73,10 @@ class ProductController extends Controller
             return response()->json(['message' => 'Forbidden'], 403);
         }
 
-        $product->update($request->only([
-            'name', 'category', 'price', 'unit', 'location',
-            'image', 'gallery', 'stock', 'description', 'badge',
-        ]));
+     $product->update($request->only([
+    'name', 'category', 'price', 'min_price', 'unit', 'location',
+    'image', 'gallery', 'stock', 'description', 'badge',
+]));
 
         return response()->json($product->toFrontendArray());
     }
