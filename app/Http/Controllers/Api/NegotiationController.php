@@ -61,15 +61,28 @@ class NegotiationController extends Controller
                 'text' => "Deal! ₦{$offer} per {$negotiation->product->unit} works. I'll pack it today.",
             ]);
         } else {
-            $counter = max($offer, (int) round(($offer + $negotiation->farmer_ask) / 2));
-            $negotiation->farmer_ask = $counter;
-            $negotiation->status = 'Counter-Offer Received';
-            NegotiationMessage::create([
-                'negotiation_id' => $negotiation->id,
-                'side' => 'farmer',
-                'text' => "I can meet you at ₦{$counter} per {$negotiation->product->unit}. Final from my side.",
-            ]);
-        }
+    $minPrice = $negotiation->product->min_price;
+    $counter = max($offer, (int) round(($offer + $negotiation->farmer_ask) / 2));
+
+    if ($minPrice && $counter < $minPrice) {
+        $counter = $minPrice;
+    }
+
+    $negotiation->farmer_ask = $counter;
+    $negotiation->status = 'Counter-Offer Received';
+
+    if ($minPrice && $counter == $minPrice) {
+        $text = "₦{$counter} per {$negotiation->product->unit} is the lowest I can go. That's my final offer.";
+    } else {
+        $text = "I can meet you at ₦{$counter} per {$negotiation->product->unit}. Final from my side.";
+    }
+
+    NegotiationMessage::create([
+        'negotiation_id' => $negotiation->id,
+        'side' => 'farmer',
+        'text' => $text,
+    ]);
+}
 
         $negotiation->save();
 
