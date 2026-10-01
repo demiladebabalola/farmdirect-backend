@@ -10,21 +10,22 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'slug',
-        'name',
-        'category',
-        'price',
-        'unit',
-        'farmer_id',
-        'location',
-        'image',
-        'gallery',
-        'rating',
-        'reviews_count',
-        'stock',
-        'description',
-        'badge',
-    ];
+    'slug',
+    'name',
+    'category',
+    'price',
+    'min_price',
+    'unit',
+    'farmer_id',
+    'location',
+    'image',
+    'gallery',
+    'rating',
+    'reviews_count',
+    'stock',
+    'description',
+    'badge',
+];
 
     protected function casts(): array
     {
